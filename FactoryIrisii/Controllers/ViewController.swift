@@ -32,10 +32,16 @@ class ViewController: UIViewController {
         return actIndy
     }()
     
+    lazy var deliveryRefreshControl: UIRefreshControl = {
+        let objectRefresh = UIRefreshControl()
+        objectRefresh.attributedTitle = NSAttributedString(string: "Get Deliveries")
+        objectRefresh.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        return objectRefresh
+    }()
+    
     var listOfDeliveriesFromAPI = [DeliveryPersisted](){
         didSet{
-            actIvityIndicator.stopAnimating()
-            actIvityIndicator.isHidden = true
+            
             tblDeliveries.reloadData()
         }
     }
@@ -60,9 +66,34 @@ class ViewController: UIViewController {
     private func callGetDeliveries(offset: Int, limit:Int){
         actIvityIndicator.isHidden = false
         actIvityIndicator.startAnimating()
-        ApiClient.shared.getDeliveries(offset: offset, limit: limit){[weak self] results in
-            self?.syncFilm(results: &results)
+
+        ApiClient.shared.getDeliveries(offset: offset, limit: limit){[weak self] results, message in
+            self?.actIvityIndicator.stopAnimating()
+            self?.actIvityIndicator.isHidden = true
+
+            if !results.isEmpty{
+                self?.deliveryRefreshControl.endRefreshing()
+                self?.syncFilm(results: &results)
+            }
+            if !message.isEmpty{
+                self?.presentAlertController(message: message)
+            }
         }
+
+    }
+    
+    private func endRefere(){
+        DispatchQueue.main.async {
+            self.deliveryRefreshControl.endRefreshing()
+        }
+    }
+    
+    private func presentAlertController(message: String){
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(.init(title: "Ok", style: .default, handler: {[weak self] Void in
+            self?.deliveryRefreshControl.endRefreshing()
+        }))
+        present(alertController, animated: true, completion: nil)
     }
 
     private func configureTable(){
@@ -73,6 +104,10 @@ class ViewController: UIViewController {
             tblDeliveries.topAnchor.constraint(equalTo: self.view.topAnchor),
             tblDeliveries.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        
+        if listOfDeliveriesFromAPI.isEmpty{
+            tblDeliveries.addSubview(deliveryRefreshControl)
+        }
     }
     
     private func configureActivityIndicator(){
@@ -81,6 +116,10 @@ class ViewController: UIViewController {
             actIvityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             actIvityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    @objc private func onRefresh(){
+        callGetDeliveries(offset: 0, limit: 0)
     }
 
 }
@@ -151,6 +190,7 @@ extension ViewController{
             for result in results {
                 result.isfavourite = false
             }
+            deliveryRefreshControl.removeFromSuperview()
             saveContext()
             loadSavedData()
         }
@@ -182,6 +222,8 @@ extension ViewController{
         
         if listOfDeliveriesFromAPI.isEmpty{
             callGetDeliveries(offset: 0, limit: 0)
+        }else{
+//            deliveryRefreshControl.removeFromSuperview()
         }
     }
 }

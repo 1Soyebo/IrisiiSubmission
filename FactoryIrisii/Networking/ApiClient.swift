@@ -18,7 +18,7 @@ class ApiClient{
     static let shared = ApiClient()
     private init(){}
     
-    func getDeliveries(offset:Int, limit: Int, assignResultsTo: @escaping (inout [DeliveryPersisted]) -> Void){
+    func getDeliveries(offset:Int, limit: Int, assignResultsTo: @escaping (inout [DeliveryPersisted], String) -> Void){
         let computedLimit = limit < 1 ? 20:limit
         let queryString = "?offset=\(offset)&limit=\(computedLimit)"
         let completeURL = baseURL + endpointGetDeliveries + queryString
@@ -34,11 +34,11 @@ class ApiClient{
                     decoder.userInfo[CodingUserInfoKey.context!] = self?.factorIrisiiStateContext
 
                     if var results = try? decoder.decode([DeliveryPersisted].self, from: responseData) {
-                        assignResultsTo(&results)
+                        assignResultsTo(&results, "")
                     }
                 case.failure(let error):
                     var results = [DeliveryPersisted]()
-                    assignResultsTo(&results)
+                    assignResultsTo(&results, "We ran Into an Error")
                     print(error.localizedDescription)
                 }
                 
