@@ -24,6 +24,16 @@ class DeliveryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    private func setupUI(){
         self.selectionStyle = .none
         mainView.layer.cornerRadius = 4
         mainView.layer.borderWidth = 0.5
@@ -35,12 +45,6 @@ class DeliveryTableViewCell: UITableViewCell {
         lblPrice.layer.cornerRadius = 4
         lblPrice.backgroundColor = UIColor.green.withAlphaComponent(0.2)
         lblPrice.font = .boldSystemFont(ofSize: 11)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func bindViewTo(deliveryObject:DeliveryPersisted){

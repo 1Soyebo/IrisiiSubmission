@@ -21,114 +21,64 @@ class DeliveryDetailViewController: UIViewController {
         return scrollView
     }()
     
-    lazy var viewLocations: UIView = {
-        let objectView = UIView()
-        objectView.translatesAutoresizingMaskIntoConstraints = false
-        objectView.backgroundColor = .white
-        objectView.layer.cornerRadius = 4
-        return objectView
+    lazy var viewLocations: DeliveryDetailCardView = {
+        return DeliveryDetailCardView()
     }()
     
-    lazy var fromTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var fromTitleLabel: DeliveryDetailTitleLabel = {
+        let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "From"
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var toTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var toTitleLabel: DeliveryDetailTitleLabel = {
+        let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "To"
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var lblFrom: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblFrom: MainLabelDeliveryDetail = {
+       return MainLabelDeliveryDetail()
     }()
     
-    lazy var lblTo: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblTo: MainLabelDeliveryDetail = {
+       return MainLabelDeliveryDetail()
     }()
     
-    lazy var stackViewFromLabel: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fillEqually
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
+    lazy var stackViewFromLabel: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.addArrangedSubview(fromTitleLabel)
         objectStackView.addArrangedSubview(lblFrom)
         return objectStackView
     }()
     
-    lazy var stackViewToLabel: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fillEqually
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
+    lazy var stackViewToLabel: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.addArrangedSubview(toTitleLabel)
         objectStackView.addArrangedSubview(lblTo)
         return objectStackView
     }()
     
-    lazy var stackViewLocations: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fill
-        objectStackView.spacing = 7
-        objectStackView.axis = .vertical
+    lazy var stackViewLocations: VerticalStackViewDeliveryDetail = {
+        let objectStackView = VerticalStackViewDeliveryDetail()
         objectStackView.addArrangedSubview(stackViewFromLabel)
         objectStackView.addArrangedSubview(stackViewToLabel)
         return objectStackView
     }()
     
-    lazy var viewContact: UIView = {
-        let objectView = UIView()
-        objectView.translatesAutoresizingMaskIntoConstraints = false
-        objectView.backgroundColor = .white
-        objectView.layer.cornerRadius = 4
-        return objectView
+    lazy var viewContact: DeliveryDetailCardView = {
+        return DeliveryDetailCardView()
     }()
     
     
-    lazy var userDetailsTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.textColor = .init(hexString: "#333333")
-        objectLabel.font = UIFont.systemFont(ofSize: 12)
-        objectLabel.textAlignment = .left
+    lazy var userDetailsTitleLabel: SmallTitleDeliveryDetail = {
+        let objectLabel = SmallTitleDeliveryDetail()
         objectLabel.text = "User Details"
         return objectLabel
     }()
     
-    lazy var stackViewContact: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fill
-        objectStackView.spacing = 7
-        objectStackView.axis = .vertical
+    lazy var stackViewContact: VerticalStackViewDeliveryDetail = {
+        let objectStackView = VerticalStackViewDeliveryDetail()
         objectStackView.addArrangedSubview(stackViewNameLabel)
         objectStackView.addArrangedSubview(stackViewEmailLabel)
         objectStackView.addArrangedSubview(stackViewPhoneLabel)
@@ -136,106 +86,61 @@ class DeliveryDetailViewController: UIViewController {
         return objectStackView
     }()
     
-    lazy var stackViewNameLabel: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fillEqually
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
+    lazy var stackViewNameLabel: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.addArrangedSubview(nameTitleLabel)
         objectStackView.addArrangedSubview(lblName)
         return objectStackView
     }()
     
-    lazy var stackViewEmailLabel: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
+    lazy var stackViewEmailLabel: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.distribution = .fillProportionally
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
         objectStackView.addArrangedSubview(emailTitleLabel)
         objectStackView.addArrangedSubview(lblEmail)
         return objectStackView
     }()
     
-    lazy var stackViewPhoneLabel: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fillEqually
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
+    lazy var stackViewPhoneLabel: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.addArrangedSubview(phoneTitleLabel)
         objectStackView.addArrangedSubview(lblPhoneNumber)
         return objectStackView
     }()
     
-    lazy var nameTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var nameTitleLabel: DeliveryDetailTitleLabel = {
+        let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "Name"
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var emailTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var emailTitleLabel: DeliveryDetailTitleLabel = {
+        let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "Email"
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var phoneTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var phoneTitleLabel: DeliveryDetailTitleLabel = {
+        let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "Phone Number"
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var lblName: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblName: MainLabelDeliveryDetail = {
+       return MainLabelDeliveryDetail()
     }()
     
-    lazy var lblEmail: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblEmail: MainLabelDeliveryDetail = {
+       return MainLabelDeliveryDetail()
     }()
     
-    lazy var lblPhoneNumber: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblPhoneNumber: MainLabelDeliveryDetail = {
+       return MainLabelDeliveryDetail()
     }()
 
     
-    lazy var viewDescription: UIView = {
-        let objectView = UIView()
-        objectView.translatesAutoresizingMaskIntoConstraints = false
-        objectView.backgroundColor = .white
-        objectView.layer.cornerRadius = 4
-        return objectView
+    lazy var viewDescription: DeliveryDetailCardView = {
+        return DeliveryDetailCardView()
     }()
     
     lazy var imgDesciption: UIImageView = {
@@ -246,61 +151,34 @@ class DeliveryDetailViewController: UIViewController {
         return objectImageView
     }()
     
-    lazy var descriptionTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.textColor = .init(hexString: "#333333")
-        objectLabel.font = UIFont.systemFont(ofSize: 12)
-        objectLabel.textAlignment = .left
+    lazy var descriptionTitleLabel: SmallTitleDeliveryDetail = {
+        let objectLabel = SmallTitleDeliveryDetail()
         objectLabel.text = "Description"
         return objectLabel
     }()
     
-    lazy var lblDescription: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .left
-        objectLabel.numberOfLines = 0
-        objectLabel.textColor = .black
-       return objectLabel
+    lazy var lblDescription: DeliveryDetailTitleLabel = {
+       return DeliveryDetailTitleLabel()
     }()
     
-    lazy var viewDeliveryFee: UIView = {
-        let objectView = UIView()
-        objectView.translatesAutoresizingMaskIntoConstraints = false
-        objectView.backgroundColor = .white
-        objectView.layer.cornerRadius = 4
-        return objectView
+    lazy var viewDeliveryFee: DeliveryDetailCardView = {
+        return DeliveryDetailCardView()
     }()
     
-    lazy var deliveryFeeTitleLabel: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.textColor = .init(hexString: "#333333")
-        objectLabel.font = UIFont.systemFont(ofSize: 12)
-        objectLabel.textAlignment = .left
+    lazy var deliveryFeeTitleLabel: SmallTitleDeliveryDetail = {
+        let objectLabel = SmallTitleDeliveryDetail()
         objectLabel.text = "Delivery Fee"
         return objectLabel
     }()
     
-    lazy var lblDeliveryFee: UILabel = {
-        let objectLabel = UILabel()
-        objectLabel.translatesAutoresizingMaskIntoConstraints = false
-        objectLabel.font = UIFont.systemFont(ofSize: 14)
-        objectLabel.textAlignment = .right
+    lazy var lblDeliveryFee: MainLabelDeliveryDetail = {
+        let objectLabel = MainLabelDeliveryDetail()
         objectLabel.numberOfLines = 1
-        objectLabel.textColor = .black
        return objectLabel
     }()
     
-    lazy var stackViewDeliveryFee: UIStackView = {
-        let objectStackView = UIStackView()
-        objectStackView.translatesAutoresizingMaskIntoConstraints = false
-        objectStackView.alignment = .fill
-        objectStackView.distribution = .fillEqually
-        objectStackView.spacing = 16
-        objectStackView.axis = .horizontal
+    lazy var stackViewDeliveryFee: HorizontalStackViewTwoLabels = {
+        let objectStackView = HorizontalStackViewTwoLabels()
         objectStackView.addArrangedSubview(deliveryFeeTitleLabel)
         objectStackView.addArrangedSubview(lblDeliveryFee)
         return objectStackView
@@ -308,29 +186,19 @@ class DeliveryDetailViewController: UIViewController {
     
     lazy var btnAddFavourites: UIButton = {
         let objectButton = UIButton()
+        objectButton.layer.cornerRadius = 10
         objectButton.translatesAutoresizingMaskIntoConstraints = false
         objectButton.setTitle("   Add To Favourite", for: .normal)
         objectButton.setImage(.init(systemName: "heart"), for: .normal)
         objectButton.addTarget(self, action: #selector(addToFavouritesTapped(_:)), for: .touchUpInside)
         return objectButton
     }()
-    
-//    @IBOutlet weak var lblName: UILabel!
-//    @IBOutlet weak var lblEmail: UILabel!
-//    @IBOutlet weak var lblPhoneNumber: UILabel!
-//    @IBOutlet weak var lblDescription: UILabel!
-//    @IBOutlet weak var lblDeliveryFee: UILabel!
-//    @IBOutlet weak var btnAddFavourites: UIButton!
-//    @IBOutlet weak var viewContact: UIView!
-//    @IBOutlet weak var viewDeliveryFee: UIView!
-//    @IBOutlet weak var viewDescription: UIView!
 
     var singleDeliveryObject: DeliveryPersisted!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Delivery Details"
-        
-        configureView()
         
         configureScrollView()
         configureViewLocations()
@@ -340,13 +208,11 @@ class DeliveryDetailViewController: UIViewController {
         configureViewDescription()
         configureViewDeliveryFee()
         configureButton()
-        
-        
+        configureView()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.view.backgroundColor = UIColor(hexString: "#F2F2F1 ")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -516,8 +382,7 @@ class DeliveryDetailViewController: UIViewController {
     }
     
     func configureView(){
-        viewDeliveryFee.layer.cornerRadius = 4
-        btnAddFavourites.layer.cornerRadius = 10
+        self.view.backgroundColor = UIColor(hexString: "#F2F2F1 ")
 
         lblFrom.text = singleDeliveryObject.route?.start
         lblTo.text = singleDeliveryObject.route?.end
@@ -526,9 +391,7 @@ class DeliveryDetailViewController: UIViewController {
         lblPhoneNumber.text = singleDeliveryObject.sender?.phone
         lblDescription.text = singleDeliveryObject.remarks
         lblDeliveryFee.text = singleDeliveryObject.getAmount()
-        
-        imgDesciption.layer.cornerRadius = 64
-        
+                
         if let imageURL = singleDeliveryObject.getPictureURL(){
             imgDesciption.loadImage(at: imageURL)
             imgDesciption.contentMode = .scaleAspectFit

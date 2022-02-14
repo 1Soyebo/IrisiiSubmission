@@ -29,11 +29,11 @@ class ApiClient{
             .responseJSON{[weak self] response in
                 switch response.result{
                 case.success:
-                    guard let hmm = response.data else {return}
+                    guard let responseData = response.data else {return}
                     let decoder = JSONDecoder()
                     decoder.userInfo[CodingUserInfoKey.context!] = self?.factorIrisiiStateContext
 
-                    if var results = try? decoder.decode([DeliveryPersisted].self, from: hmm) {
+                    if var results = try? decoder.decode([DeliveryPersisted].self, from: responseData) {
                         assignResultsTo(&results)
                     }
                 case.failure(let error):
