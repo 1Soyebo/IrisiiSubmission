@@ -9,7 +9,6 @@ import UIKit
 
 /// could have used a tableView, or even better SwiftUI.
 /// first time using programmatic UI
-/// should have used custom classes too
 class DeliveryDetailViewController: UIViewController {
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -27,13 +26,13 @@ class DeliveryDetailViewController: UIViewController {
     
     lazy var fromTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
-        objectLabel.text = "From"
+        objectLabel.text = "From:"
        return objectLabel
     }()
     
     lazy var toTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
-        objectLabel.text = "To"
+        objectLabel.text = "To:"
        return objectLabel
     }()
     
@@ -95,7 +94,6 @@ class DeliveryDetailViewController: UIViewController {
     
     lazy var stackViewEmailLabel: HorizontalStackViewTwoLabels = {
         let objectStackView = HorizontalStackViewTwoLabels()
-        objectStackView.distribution = .fillProportionally
         objectStackView.addArrangedSubview(emailTitleLabel)
         objectStackView.addArrangedSubview(lblEmail)
         return objectStackView
@@ -110,19 +108,19 @@ class DeliveryDetailViewController: UIViewController {
     
     lazy var nameTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
-        objectLabel.text = "Name"
+        objectLabel.text = "Name:"
        return objectLabel
     }()
     
     lazy var emailTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
-        objectLabel.text = "Email"
+        objectLabel.text = "Email:"
        return objectLabel
     }()
     
     lazy var phoneTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
-        objectLabel.text = "Phone Number"
+        objectLabel.text = "Phone Number:"
        return objectLabel
     }()
     
@@ -153,12 +151,14 @@ class DeliveryDetailViewController: UIViewController {
     
     lazy var descriptionTitleLabel: SmallTitleDeliveryDetail = {
         let objectLabel = SmallTitleDeliveryDetail()
-        objectLabel.text = "Description"
+        objectLabel.text = "Description | Pickup Time: \(singleDeliveryObject.getFromTime())"
         return objectLabel
     }()
     
     lazy var lblDescription: DeliveryDetailTitleLabel = {
-       return DeliveryDetailTitleLabel()
+        let objectLabel = DeliveryDetailTitleLabel()
+        objectLabel.numberOfLines = 0
+       return objectLabel
     }()
     
     lazy var viewDeliveryFee: DeliveryDetailCardView = {
@@ -322,7 +322,7 @@ class DeliveryDetailViewController: UIViewController {
         viewDescription.addSubview(lblDescription)
         NSLayoutConstraint.activate([
             lblDescription.leftAnchor.constraint(equalTo: viewDescription.leftAnchor, constant: 16),
-            lblDescription.rightAnchor.constraint(equalTo: viewDescription.rightAnchor, constant: 16),
+            lblDescription.trailingAnchor.constraint(equalTo: viewDescription.trailingAnchor, constant: -16),
             lblDescription.topAnchor.constraint(equalTo: descriptionTitleLabel.bottomAnchor, constant: 8.5),
             lblDescription.bottomAnchor.constraint(greaterThanOrEqualTo: viewDescription.bottomAnchor, constant: 8.5)
             
@@ -356,7 +356,7 @@ class DeliveryDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             btnAddFavourites.leftAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.leftAnchor, constant: 16),
             btnAddFavourites.rightAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.rightAnchor, constant: 16),
-            btnAddFavourites.bottomAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.bottomAnchor, constant: 20),
+            btnAddFavourites.bottomAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.bottomAnchor, constant: -20),
             btnAddFavourites.topAnchor.constraint(equalTo: viewDeliveryFee.bottomAnchor, constant: 16),
             btnAddFavourites.centerXAnchor.constraint(equalTo: mainScrollView.centerXAnchor),
             btnAddFavourites.heightAnchor.constraint(equalToConstant: 50)

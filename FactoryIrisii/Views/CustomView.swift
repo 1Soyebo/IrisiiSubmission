@@ -72,7 +72,7 @@ class HorizontalStackViewTwoLabels: UIStackView {
         super.init(frame : frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.alignment = .fill
-        self.distribution = .fillEqually
+        self.distribution = .fillProportionally
         self.spacing = 16
         self.axis = .horizontal
     }
