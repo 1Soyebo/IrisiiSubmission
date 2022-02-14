@@ -115,6 +115,7 @@ class DeliveryDetailViewController: UIViewController {
     lazy var emailTitleLabel: DeliveryDetailTitleLabel = {
         let objectLabel = DeliveryDetailTitleLabel()
         objectLabel.text = "Email:"
+        objectLabel.adjustsFontSizeToFitWidth = true
        return objectLabel
     }()
     
@@ -129,7 +130,10 @@ class DeliveryDetailViewController: UIViewController {
     }()
     
     lazy var lblEmail: MainLabelDeliveryDetail = {
-       return MainLabelDeliveryDetail()
+        let objectLabel = MainLabelDeliveryDetail()
+        objectLabel.adjustsFontSizeToFitWidth = true
+        objectLabel.minimumScaleFactor = 0.5
+       return objectLabel
     }()
     
     lazy var lblPhoneNumber: MainLabelDeliveryDetail = {
