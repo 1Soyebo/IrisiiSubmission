@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DeliveryPersisted" representedClassName="DeliveryPersisted" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deliveryFee" optional="YES" attributeType="String"/>
+        <attribute name="goodsPicture" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isfavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="pickupTime" optional="YES" attributeType="String"/>
+        <attribute name="remarks" optional="YES" attributeType="String"/>
+        <attribute name="surcharge" optional="YES" attributeType="String"/>
+        <relationship name="route" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RoutePersisted" inverseName="delivery" inverseEntity="RoutePersisted"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SenderPersisted" inverseName="delivery" inverseEntity="SenderPersisted"/>
+    </entity>
+    <entity name="RoutePersisted" representedClassName="RoutePersisted" syncable="YES">
+        <attribute name="end" optional="YES" attributeType="String"/>
+        <attribute name="start" optional="YES" attributeType="String"/>
+        <relationship name="delivery" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DeliveryPersisted" inverseName="route" inverseEntity="DeliveryPersisted"/>
+    </entity>
+    <entity name="SenderPersisted" representedClassName="SenderPersisted" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <relationship name="delivery" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DeliveryPersisted" inverseName="sender" inverseEntity="DeliveryPersisted"/>
+    </entity>
+    <elements>
+        <element name="DeliveryPersisted" positionX="-63" positionY="-18" width="128" height="179"/>
+        <element name="RoutePersisted" positionX="-54" positionY="0" width="128" height="74"/>
+        <element name="SenderPersisted" positionX="-36" positionY="9" width="128" height="89"/>
+    </elements>
+</model>
